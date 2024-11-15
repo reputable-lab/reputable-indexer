@@ -1,0 +1,74 @@
+services:
+  graph-node:
+    restart: unless-stopped
+    image: graphprotocol/graph-node:v0.34.1
+    ports:
+      - "8000:8000"
+      - "8001:8001"
+      - "8020:8020"
+      - "8030:8030"
+      - "8040:8040"
+    depends_on:
+      - ipfs
+      - postgres
+    expose:
+      - 8000
+      - 8020
+    environment:
+      postgres_host: postgres
+      postgres_port: 5432
+      postgres_user: "${DB_USER}"
+      postgres_pass: "${DB_PASSWORD}"
+      postgres_db: "${DB_NAME}"
+      ipfs: "ipfs:5001"
+      ethereum: "mainnet:https://sepolia.unichain.org"
+      GRAPH_LOG: info
+    healthcheck:
+      test: netcat -w 1 0.0.0.0 8020
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+
+  ipfs:
+    restart: unless-stopped
+    image: ipfs/go-ipfs:v0.9.1
+    ports:
+      - "5001:5001"
+    volumes:
+      - ipfs-data:/data/ipfs
+    healthcheck:
+      test: nc -z 0.0.0.0 8080 && nc -z 0.0.0.0 5001
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+  postgres:
+    image: postgres:12
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    command:
+      - "postgres"
+      - "-cshared_preload_libraries=pg_stat_statements"
+    environment:
+      POSTGRES_USER: "${DB_USER}"
+      POSTGRES_PASSWORD: "${DB_PASSWORD}"
+      POSTGRES_DB: "${DB_NAME}"
+      PGDATA: "/var/lib/postgresql/data"
+      POSTGRES_INITDB_ARGS: "-E UTF8 --locale=C"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: pg_isready -U graphnode -d graphnode-db
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 30s
+
+volumes:
+  ipfs-data:
+  postgres-data:

@@ -1,0 +1,19 @@
+type ReputableModel @entity {
+  id: Bytes!
+  modelName: String!
+  owner: Bytes!
+  modelWeights: ModelWeights!
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type ModelWeights @entity(immutable: true) {
+  id: ID!
+  commitWeight: BigInt!
+  nbOfContributorWeight: BigInt!
+  contributionRecencyWeight: BigInt!
+  txWeight: BigInt!
+  uniqueFromWeight: BigInt!
+  tveWeight: BigInt!
+}

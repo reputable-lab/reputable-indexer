@@ -1,0 +1,54 @@
+specVersion: 1.0.0
+
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+
+dataSources:
+  # ============================= ReputableHub ==============================
+  - kind: ethereum
+    name: ReputableHub
+    network: unichain-testnet
+    source:
+      address: "0x7873905cBF47d83e7389a8bd86aA70895CEAF1DD"
+      abi: ReputableHub
+      startBlock: 3129071
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ReputableModel
+        - ModelWeights
+      abis:
+        - name: ReputableHub
+          file: node_modules/@reputable-lab/reputable-contracts/artifacts/contracts/ReputableHub.sol/ReputableHub.json
+      eventHandlers:
+        - event: NewReputableModel(string,address)
+          handler: handleNewReputableModel
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransferReputationModel
+      file: ./src/reputableHub.ts
+
+# ============================= ReputableModel Template ==============================
+templates:
+  - kind: ethereum
+    name: ReputableModelTemplate
+    network: unichain-testnet
+    source:
+      abi: ReputableModel
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ReputableModel
+        - ModelWeights
+      abis:
+        - name: ReputableModel
+          file: node_modules/@reputable-lab/reputable-contracts/artifacts/contracts/beacon/ReputableModel.sol/ReputableModel.json
+      eventHandlers:
+        - event: ReputableModelUpdated()
+          handler: handleReputableModelUpdated
+      file: ./src/reputableModel.ts

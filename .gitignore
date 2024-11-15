@@ -1,0 +1,11 @@
+**/.env
+**/data
+.DS_Store
+
+# TypeScript specific
+**/.tsbuildinfo
+
+# subgraph
+**/generated
+**/node_modules
+**/build

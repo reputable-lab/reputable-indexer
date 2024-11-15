@@ -1,0 +1,8 @@
+{
+  "unichain-testnet": {
+    "ERC1967Proxy": {
+      "address": "0x7873905cBF47d83e7389a8bd86aA70895CEAF1DD",
+      "startBlock": 3129071
+    }
+  }
+}
