@@ -24,6 +24,8 @@ dataSources:
       abis:
         - name: ReputableHub
           file: node_modules/@reputable-lab/reputable-contracts/artifacts/contracts/ReputableHub.sol/ReputableHub.json
+        - name: ReputableModel
+          file: node_modules/@reputable-lab/reputable-contracts/artifacts/contracts/beacon/ReputableModel.sol/ReputableModel.json
       eventHandlers:
         - event: NewReputableModel(string,address)
           handler: handleNewReputableModel

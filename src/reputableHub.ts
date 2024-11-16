@@ -5,7 +5,6 @@ import {
 import { ReputableModel as ReputableModelContract } from "../generated/templates/ReputableModelTemplate/ReputableModel";
 import { ReputableModelTemplate } from "../generated/templates";
 import { ModelWeights, ReputableModel } from "../generated/schema";
-import { BigInt } from "@graphprotocol/graph-ts";
 import { getEventId, intToAddress } from "./utils";
 
 export function handleNewReputableModel(event: NewReputableModelEvent): void {
