@@ -6,7 +6,7 @@
     "build": "graph build",
     "stop:graph-node": "docker compose --project-name graph-node down --volumes --remove-orphans",
     "start:graph-node": "npm run stop:graph-node && docker compose --project-name graph-node up -d",
-    "deploy": "graph deploy --node https://api.studio.thegraph.com/deploy/ Reputable",
+    "deploy": "graph deploy reputable",
     "create-local": "graph create --node http://localhost:8020/ Reputable",
     "remove-local": "graph remove --node http://localhost:8020/ Reputable",
     "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 Reputable --version-label ${VERSION_LABEL:-dev}",

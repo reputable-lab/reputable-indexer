@@ -17,16 +17,13 @@ export function handleNewReputableModel(event: NewReputableModelEvent): void {
     let contract = ReputableModelContract.bind(event.params.reputableModel);
     const _modelWeights = contract.getReputableModelWeights();
 
-    modelWeights.commitWeight = new BigInt(_modelWeights.commitWeight);
-    modelWeights.nbOfContributorWeight = new BigInt(
-      _modelWeights.nbOfContributorWeight
-    );
-    modelWeights.contributionRecencyWeight = new BigInt(
-      _modelWeights.contributionRecencyWeight
-    );
-    modelWeights.txWeight = new BigInt(_modelWeights.txWeight);
-    modelWeights.uniqueFromWeight = new BigInt(_modelWeights.uniqueFromWeight);
-    modelWeights.tveWeight = new BigInt(_modelWeights.tveWeight);
+    modelWeights.commitWeight = _modelWeights.commitWeight;
+    modelWeights.nbOfContributorWeight = _modelWeights.nbOfContributorWeight;
+    modelWeights.contributionRecencyWeight =
+      _modelWeights.contributionRecencyWeight;
+    modelWeights.txWeight = _modelWeights.txWeight;
+    modelWeights.uniqueFromWeight = _modelWeights.uniqueFromWeight;
+    modelWeights.tveWeight = _modelWeights.tveWeight;
     modelWeights.save();
   }
 

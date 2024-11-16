@@ -11,7 +11,7 @@ dataSources:
     name: ReputableHub
     network: unichain-testnet
     source:
-      address: "0x7873905cBF47d83e7389a8bd86aA70895CEAF1DD"
+      address: "0x56e0F20D2666B0bDd0Deb5A9f7De12b4ABcA2526"
       abi: ReputableHub
       startBlock: 3129071
     mapping:

@@ -10,10 +10,10 @@ type ReputableModel @entity {
 
 type ModelWeights @entity(immutable: true) {
   id: ID!
-  commitWeight: BigInt!
-  nbOfContributorWeight: BigInt!
-  contributionRecencyWeight: BigInt!
-  txWeight: BigInt!
-  uniqueFromWeight: BigInt!
-  tveWeight: BigInt!
+  commitWeight: Int!
+  nbOfContributorWeight: Int!
+  contributionRecencyWeight: Int!
+  txWeight: Int!
+  uniqueFromWeight: Int!
+  tveWeight: Int!
 }
